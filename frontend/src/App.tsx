@@ -5,10 +5,10 @@ import Navbar from './Components/Navbar';
 
 function App() {
   return (
-    <div className='w-full h-full flex flex-col justify-start bg-white'>
-      <Navbar/>
+    <div className='w-full h-full flex flex-row justify-start bg-white'>
+      <SidePanel/>
       <div className='flex flex-row w-full h-full'>
-        <SidePanel/>
+        <Navbar/>
       </div>
     </div>
   );
