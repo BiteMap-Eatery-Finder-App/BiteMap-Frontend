@@ -9,8 +9,8 @@ type Props = {}
 
 const SidePanel = (props: Props) => {
   return (
-    <div className='flex h-[100vh] w-[320px] bg-darkGray flex-col border-r-[1px] border-lightGray py-6'>
-        <div className='flex w-full h-[30px] flex-col px-10 transition-[0.5s] font-mulish font-medium text-lightGray/50 text-[18px]'>
+    <div className='flex h-[100vh] w-[320px] bg-darkGray flex-col border-r-[1px] border-lightGray py-4'>
+        <div className='flex w-full h-[30px] flex-col px-10 transition-[0.5s] font-mulish font-medium text-lightGray/50 text-[18px] mt-[20px]'>
             <p className=''>General</p>
             <hr className='text-lightGray/50 w-full mt-[5px]'/>
         </div>
