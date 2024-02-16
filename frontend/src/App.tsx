@@ -11,6 +11,7 @@ function App() {
       <SidePanel/>
       <div className='flex flex-col w-full h-full'>
         <Navbar/>
+        <HomePage/>
       </div>
     </div>
   );
