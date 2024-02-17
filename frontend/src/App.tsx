@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import SidePanel from './Components/SidePanel';
 import Navbar from './Components/Navbar';
 import HomePage from './Pages/HomePage';
-import { MapContainer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
 function App() {
   return (
