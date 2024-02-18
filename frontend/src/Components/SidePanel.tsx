@@ -33,8 +33,8 @@ const filters = [
 
 const SidePanel = (props: Props) => {
   return (
-    <div className='flex h-full w-[300px] bg-darkGray flex-col border-r-[1px] py-4 rounded-b-md'>
-        <div className='flex w-full h-[30px] flex-col px-10 transition-[0.5s] font-mulish font-medium text-lightGray/50 text-[16px] mt-[20px]'>
+    <div className='flex h-full w-full bg-darkGray flex-col border-r-[1px] py-4 rounded-md'>
+        <div className='flex w-full h-[30px] flex-col px-10 transition-[0.5s] font-mulish font-medium text-lightGray/50 text-[18px] mt-[20px]'>
             <p>General</p>
             <hr className='text-lightGray/50 w-full mt-[5px]'/>
         </div>
@@ -69,7 +69,7 @@ const SidePanel = (props: Props) => {
                             {({ open }) => (
                             <>
                                 <h3 className="-my-3 flow-root">
-                                    <Disclosure.Button className="flex w-full items-center justify-between font-mulish font-medium text-lightGray/50 text-[16px]">
+                                    <Disclosure.Button className="flex w-full items-center justify-between font-mulish font-medium text-lightGray/50 text-[18px]">
                                         <span className="font-mulish font-medium text-lightGray/50">{section.name}</span>
                                         <span className="ml-6 flex items-center">
                                         {open ? (

@@ -26,13 +26,27 @@ const Map = (props: Props) => {
         setLongitude(19.833549);
     }, []);
 
+    const [isLoading, setLoading] = useState(true);
+
+    useEffect(()=>{        
+      setTimeout(()=> {
+          setLoading(false);
+      },1500)        
+    },[]);
+  
+  
+    if(isLoading){
+      return ( 
+          <div className='flex flex-col items-center justify-center h-[100vh]'></div> 
+        );
+    }else
     return (
         <div className="w-full h-auto flex rounded-md shadow-xl">
             <MapContainer 
                 className='w-full h-[350px] rounded-md' 
-                center={[Latitude, Longitude]}
+                center={[Latitude, Longitude]} // Postavite centar mape na istu poziciju kao i marker
                 attributionControl={true}
-                zoom={6}
+                zoom={14}
                 minZoom={3}
                 maxZoom={19}
                 scrollWheelZoom={true}
