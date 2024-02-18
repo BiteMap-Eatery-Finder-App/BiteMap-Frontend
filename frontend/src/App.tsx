@@ -8,11 +8,17 @@ import L from 'leaflet';
 
 function App() {
   return (
-    <div className='w-full h-full flex flex-row justify-start bg-white'>
-      <SidePanel/>
-      <div className='flex flex-col w-full h-full'>
+    <div className='w-full h-full flex flex-col justify-start bg-white'>
+      <div className='bg-lightGray/10'>
         <Navbar/>
-        <HomePage/>
+      </div>
+      <div className='flex flex-row w-full h-full px-10 py-6 justify-between'>
+        <div className='flex w-[18%] h-full'>
+          <SidePanel/>
+        </div>
+        <div className='flex w-[80%] h-full'>
+          <HomePage/>
+        </div>
       </div>
     </div>
   );

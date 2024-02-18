@@ -12,9 +12,8 @@ const Map = (props: Props) => {
 
     const [Latitude, setLatitude] = useState(Number);
     const [Longitude, setLongitude] = useState(Number);
-    const [isLoading, setLoading] = useState(true);
 
-    /*const icon = L.icon({ 
+    const icon = L.icon({ 
         iconRetinaUrl:iconRetina, 
         iconUrl: iconMarker, 
         shadowUrl: iconShadow, 
@@ -25,31 +24,45 @@ const Map = (props: Props) => {
     useEffect(() => { 
         setLatitude(45.267136);
         setLongitude(19.833549);
-    }, []);*/
+    }, []);
+
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(()=>{        
       setTimeout(()=> {
           setLoading(false);
-          loadMap();
       },1500)        
     },[]);
   
   
-    const loadMap =  async() => {
-        var map = L.map('map').setView([51.505, -0.09], 13);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-    }
-
     if(isLoading){
       return ( 
           <div className='flex flex-col items-center justify-center h-[100vh]'></div> 
         );
     }else
     return (
-        <div id='map' className="w-[400px] h-[400px] flex">
+        <div className="w-full h-auto flex rounded-md shadow-xl">
+            <MapContainer 
+                className='w-full h-[350px] rounded-md' 
+                center={[Latitude, Longitude]} // Postavite centar mape na istu poziciju kao i marker
+                attributionControl={true}
+                zoom={14}
+                minZoom={3}
+                maxZoom={19}
+                scrollWheelZoom={true}
+                zoomControl={true}
+                easeLinearity={0.35}
+                dragging={true}>
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={[Latitude,Longitude]}  icon={icon}>
+                    <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                </Marker>
+            </MapContainer>
         </div>
     )
 }
