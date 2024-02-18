@@ -19,7 +19,7 @@ const HomePage = (props: Props) => {
       );
   }else
   return (
-    <div className='w-[400px] h-[400px]'>
+    <div className='w-full h-[500px]'>
         <Map/>
     </div>
   )
