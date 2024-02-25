@@ -1,6 +1,6 @@
 export interface Establishment{
-    Id : number;
-    Name : string;
-    Description : string;
-    Type : number;
+    id : number;
+    name : string;
+    description : string;
+    type : number;
 }
