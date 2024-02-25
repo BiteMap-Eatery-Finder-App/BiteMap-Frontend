@@ -5,6 +5,7 @@ import Navbar from './Components/Navbar';
 import HomePage from './Pages/HomePage';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
         <div className='flex w-[80%] h-full'>
           <HomePage/>
         </div>
+      </div>
+      <div>
+        <hr className='w-full text-lightGray'></hr>
+        <Footer/>
       </div>
     </div>
   );
