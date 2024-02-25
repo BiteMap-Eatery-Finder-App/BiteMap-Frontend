@@ -17,7 +17,8 @@ module.exports = {
         yellow:"#fbc531",
         lightYellow:"#fdedc1",
         darkGreen: "#037971",
-        gray: "#7f8fa6"
+        gray: "#7f8fa6",
+        cardWhite: "#FEFEFF"
       },
       screens: {
         xs: "480px",

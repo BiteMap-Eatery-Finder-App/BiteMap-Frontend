@@ -7,28 +7,36 @@ import { Establishment } from '../Models/Establishment'
 
 type Props = {}
 
-const HomePage = (props: Props) => {
+const HomePage : React.FC<Props> = (props: Props) : JSX.Element => {
 
-  const [establishments, setEstablishments] = useState<Establishment[]>([]);
+  const [establishments, setEstablishments] = useState<Establishment[]>([])
+
+  const fetchEstablishments = async () => { 
+    try {
+      axios.get(url)
+      .then(response => {
+        setEstablishments(response.data);
+      }).catch(err => {
+        console.log(err);
+      })
+    } catch (error) {
+      console.log("Error fetching data.");
+    }
+  }
 
   useEffect(() => {
-    axios.get(url)
-      .then((response: AxiosResponse<any>) => {
-        setEstablishments(response.data);
-        console.log(response.data);
-      })
-  }, [])
- 
+    fetchEstablishments();
+  }, []);
+
   return (
     <div className='flex flex-col w-full h-full'>
         <div>
           <Map/>
         </div>
-        <div className='flex flex-row w-full h-auto justify-between flex-wrap'>
+        <div className='flex flex-row w-full h-auto justify-between flex-wrap mt-10'>
           {
-            establishments.map((establishment) => (
-              <EstablishmentCard Id={establishment?.Id} Name={establishment?.Name} Description={establishment?.Description} Type={establishment?.Type}></EstablishmentCard>
-              //<EstablishmentCard Name="aa" Description="ee" Type={2}></EstablishmentCard>
+            establishments.map((establishment, index) => (
+              <EstablishmentCard key={index} id={establishment.id} name={establishment.name} description={establishment.description} type={establishment.type}/>
             ))
           }
         </div>
