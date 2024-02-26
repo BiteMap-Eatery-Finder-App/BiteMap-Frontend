@@ -5,22 +5,29 @@ import Navbar from './Components/Navbar';
 import HomePage from './Pages/HomePage';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import Footer from './Components/Footer';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import VisitEstablishmentPage from './Pages/VisitEstablishmentPage';
 
 function App() {
   return (
-    <div className='w-full h-full flex flex-col justify-start bg-white'>
-      <div className='bg-lightGray/10'>
-        <Navbar/>
-      </div>
-      <div className='flex flex-row w-full h-full px-10 py-6 justify-between'>
-        <div className='flex w-[18%] h-full'>
-          <SidePanel/>
+    <BrowserRouter>
+      <div className='w-full h-full flex flex-col justify-start bg-white'>
+        <div className='bg-lightGray/10'>
+          <Navbar/>
         </div>
-        <div className='flex w-[80%] h-full'>
-          <HomePage/>
+
+        <Routes>
+          <Route path="/" Component = {HomePage}/>
+          <Route path='/Establishment/:establishmentId' Component={VisitEstablishmentPage}/>
+        </Routes>
+        
+        <div>
+          <hr className='w-full text-lightGray'></hr>
+          <Footer/>
         </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

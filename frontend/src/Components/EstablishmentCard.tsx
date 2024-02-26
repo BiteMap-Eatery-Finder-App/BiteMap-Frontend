@@ -3,6 +3,7 @@ import { Establishment } from '../Models/Establishment';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { Icon } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 interface Props {
     Id : number,
@@ -49,10 +50,12 @@ const EstablishmentCard : React.FC<Establishment> = (establishment : Establishme
           <p className='font-light text-[16px] text-gray'>{establishment.description}</p>
         </div>
         <div className='flex w-full justify-end'>
-          <button className='w-[150px] h-[35px] bg-lightRed rounded-md shadow-md text-white font-semibold text-[18px]
-                            transition-[0.5s] hover:bg-darkRed'>
-            Visit
-          </button>
+          <Link to={`/Establishment/${establishment.id}`}>
+            <button className='w-[150px] h-[35px] bg-lightRed rounded-md shadow-md text-white font-semibold text-[18px]
+                              transition-[0.5s] hover:bg-darkRed'>
+              Visit
+            </button>
+          </Link>
         </div>
       </div>
     </div>
