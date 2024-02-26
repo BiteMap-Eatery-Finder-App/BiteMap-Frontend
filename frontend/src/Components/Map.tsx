@@ -31,13 +31,15 @@ const Map = (props: Props) => {
     useEffect(()=>{        
       setTimeout(()=> {
           setLoading(false);
-      },1500)        
+      })        
     },[]);
   
   
     if(isLoading){
       return ( 
-          <div className='flex flex-col items-center justify-center h-[100vh]'></div> 
+        <section className="bg-white dark:bg-gray-900">
+            <div className="w-full h-[350px] bg-gray/60 flex rounded-md animate-pulse"/>
+        </section>
         );
     }else
     return (
