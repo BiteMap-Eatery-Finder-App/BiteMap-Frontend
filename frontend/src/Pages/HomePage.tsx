@@ -28,7 +28,7 @@ const HomePage : React.FC<Props> = (props: Props) : JSX.Element => {
   useEffect(() => {
     fetchEstablishments();
   }, []);
-  
+
   const [isLoading, setLoading] = useState(true);
 
   useEffect(()=>{        
@@ -49,7 +49,7 @@ const HomePage : React.FC<Props> = (props: Props) : JSX.Element => {
               <div className='flex flex-row w-full h-auto justify-between flex-wrap mt-10'>
                 {
                   establishments.map((establishment, index) => (
-                    <div className='flex flex-col w-[450px] h-[350px] max-h-[350px] bg-cardWhite rounded-md shadow-md font-mulish justify-evenly relative'>
+                    <div key={index} className='flex flex-col w-[450px] h-[350px] max-h-[350px] bg-cardWhite rounded-md shadow-md font-mulish justify-evenly relative'>
                       <div className='w-full h-[250px] object-cover rounded-t-md mb-2 bg-gray/60'/>
                       <div className='flex flex-col w-full h-full p-4 justify-between'>
                         <div className='flex flex-col w-full justify-start'>
