@@ -15,14 +15,12 @@ import StaffSection from '../Components/Establishment/StaffSection';
 const VisitEstablishmentPage = () => {
     const { establishmentId } = useParams();
     const [establishment, setEstablishment] = useState();
-    const [establishmentName, setEstablishmentName] = useState("");
     const [imagePath, setImagePath] = useState("");
     const [activeSection, setActiveSection] = useState("home");
 
     const fetchObject = async () => {
         const { data } = await axios.get(`${getById}${establishmentId}`);
         setEstablishment(data);
-        setEstablishmentName(data.name);
         findImageUrl(data);
     }
 
@@ -45,10 +43,6 @@ const VisitEstablishmentPage = () => {
         const img = new Image();
         img.src = imagePath;
         return img.complete || img.width + img.height > 0;
-    };
-
-    const handleSectionClick = (sectionName) => {
-        setActiveSection(sectionName);
     };
 
     const renderSection = () => {
@@ -93,37 +87,37 @@ const VisitEstablishmentPage = () => {
                     </div>
                     <div className={`flex w-full h-[50px] flex-row justify-start items-center hover:bg-darkRed hover:text-white px-10 
                                     transition-[0.5s] font-mulish font-medium text-white text-[20px] cursor-pointer mt-2 
-                                    ${activeSection === "home" ? "bg-darkRed text-white" : ""}`} onClick={() => handleSectionClick("home")}>
+                                    ${activeSection === "home" ? "bg-darkRed text-white" : ""}`} onClick={() => setActiveSection("home")}>
                                         <FontAwesomeIcon icon={faHouse} className='text-[18px]'/>
                         <p className='ml-6'>Home</p>
                     </div>
                     <div className={`flex w-full h-[50px] flex-row justify-start items-center hover:bg-darkRed hover:text-white px-10 
                                     transition-[0.5s] font-mulish font-medium text-white text-[20px] cursor-pointer mt-2 
-                                    ${activeSection === "reviews" ? "bg-darkRed text-white" : ""}`} onClick={() => handleSectionClick("reviews")}>
+                                    ${activeSection === "reviews" ? "bg-darkRed text-white" : ""}`} onClick={() => setActiveSection("reviews")}>
                         <FontAwesomeIcon icon={faStar} className='text-[18px]' />
                         <p className='ml-6'>Reviews</p>
                     </div>
                     <div className={`flex w-full h-[50px] flex-row justify-start items-center hover:bg-darkRed hover:text-white px-10 
                                     transition-[0.5s] font-mulish font-medium text-white text-[20px] cursor-pointer 
-                                    ${activeSection === "menu" ? "bg-darkRed text-white" : ""}`} onClick={() => handleSectionClick("menu")}>
+                                    ${activeSection === "menu" ? "bg-darkRed text-white" : ""}`} onClick={() => setActiveSection("menu")}>
                         <FontAwesomeIcon icon={faUtensils} className='text-[18px]' />
                         <p className='ml-6'>Menu</p>
                     </div>
                     <div className={`flex w-full h-[50px] flex-row justify-start items-center hover:bg-darkRed hover:text-white px-10 
                                     transition-[0.5s] font-mulish font-medium text-white text-[20px] cursor-pointer 
-                                    ${activeSection === "images" ? "bg-darkRed text-white" : ""}`} onClick={() => handleSectionClick("images")}>
+                                    ${activeSection === "images" ? "bg-darkRed text-white" : ""}`} onClick={() => setActiveSection("images")}>
                         <FontAwesomeIcon icon={faImage} className='text-[18px]' />
                         <p className='ml-6'>Images</p>
                     </div>
                     <div className={`flex w-full h-[50px] flex-row justify-start items-center hover:bg-darkRed hover:text-white px-10 
                                     transition-[0.5s] font-mulish font-medium text-white text-[20px] cursor-pointer 
-                                    ${activeSection === "news" ? "bg-darkRed text-white" : ""}`} onClick={() => handleSectionClick("news")}>
+                                    ${activeSection === "news" ? "bg-darkRed text-white" : ""}`} onClick={() => setActiveSection("news")}>
                         <FontAwesomeIcon icon={faNewspaper} className='text-[18px]' />
                         <p className='ml-6'>News</p>
                     </div>
                     <div className={`flex w-full h-[50px] flex-row justify-start items-center hover:bg-darkRed hover:text-white px-10 
                                     transition-[0.5s] font-mulish font-medium text-white text-[20px] cursor-pointer 
-                                    ${activeSection === "staff" ? "bg-darkRed text-white" : ""}`} onClick={() => handleSectionClick("staff")}>
+                                    ${activeSection === "staff" ? "bg-darkRed text-white" : ""}`} onClick={() => setActiveSection("staff")}>
                         <FontAwesomeIcon icon={faUsers} className='text-[18px]' />
                         <p className='ml-6'>Staff</p>
                     </div>
