@@ -11,6 +11,7 @@ import MenuSection from '../Components/Establishment/MenuSection';
 import GalerySection from '../Components/Establishment/GalerySection';
 import NewsSection from '../Components/Establishment/NewsSection';
 import StaffSection from '../Components/Establishment/StaffSection';
+import InformationsBar from '../Components/Establishment/InformationsBar';
 
 const VisitEstablishmentPage = () => {
     const { establishmentId } = useParams();
@@ -77,7 +78,7 @@ const VisitEstablishmentPage = () => {
                 </div>
             </div>
             <div className='flex flex-row w-full h-full justify-between mt-20 font-mulish'>
-                <div className='flex flex-col w-[18%] h-auto bg-darkGray rounded-md shadow-md py-4'>
+                <div className='flex flex-col w-[17%] h-[450px] bg-darkGray rounded-md shadow-md py-4'>
                     <div className='flex flex-col px-10 w-full h-[100px] justify-between'>
                         <p className='text-[16px] text-lightGray/50'>Need a table?</p>
                         <button className='w-full h-[40px] text-[18px] font-semibold text-white bg-lightRed rounded-md transition-[0.5s] hover:bg-darkRed'>
@@ -86,13 +87,13 @@ const VisitEstablishmentPage = () => {
                         <hr className='w-full text-lightGray/50'></hr>
                     </div>
                     <div className={`flex w-full h-[50px] flex-row justify-start items-center hover:bg-darkRed hover:text-white px-10 
-                                    transition-[0.5s] font-mulish font-medium text-white text-[20px] cursor-pointer mt-2 
+                                    transition-[0.5s] font-mulish font-medium text-white text-[20px] cursor-pointer mt-2
                                     ${activeSection === "home" ? "bg-darkRed text-white" : ""}`} onClick={() => setActiveSection("home")}>
                                         <FontAwesomeIcon icon={faHouse} className='text-[18px]'/>
                         <p className='ml-6'>Home</p>
                     </div>
                     <div className={`flex w-full h-[50px] flex-row justify-start items-center hover:bg-darkRed hover:text-white px-10 
-                                    transition-[0.5s] font-mulish font-medium text-white text-[20px] cursor-pointer mt-2 
+                                    transition-[0.5s] font-mulish font-medium text-white text-[20px] cursor-pointer 
                                     ${activeSection === "reviews" ? "bg-darkRed text-white" : ""}`} onClick={() => setActiveSection("reviews")}>
                         <FontAwesomeIcon icon={faStar} className='text-[18px]' />
                         <p className='ml-6'>Reviews</p>
@@ -122,8 +123,11 @@ const VisitEstablishmentPage = () => {
                         <p className='ml-6'>Staff</p>
                     </div>
                 </div>
-                <div className='w-[80%] h-auto flex flex-col'>
-                    {renderSection()}
+                <div className='w-[81%] h-auto flex flex-col'>
+                    <InformationsBar/>
+                    <div className='mt-10'>
+                        {renderSection()}
+                    </div>
                 </div>
             </div>
         </div>
