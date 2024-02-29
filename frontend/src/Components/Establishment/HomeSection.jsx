@@ -1,6 +1,7 @@
 import React from 'react'
-import { faStar, faUtensils, faBell, faWallet, faDroplet } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faUtensils, faBell, faWallet, faDroplet, faLocationPin, faLaptop, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Map from '../Map'
 
 const HomeSection = () => {
   return (
@@ -77,11 +78,55 @@ const HomeSection = () => {
             </div>
           </div>
         </div>
-        <div className='flex flex-col w-[450px] h-[400px] bg-cardWhite rounded-md shadow-md p-6'>
-          <p className='font-bold text-[20px]'>About</p>
+        <div className='flex flex-col w-[550px] h-[500px] min-h-[400px] max-h-auto bg-cardWhite rounded-md shadow-md p-6 justify-between'>
+          <p className='font-bold text-[20px]'>Details</p>
+          <div className='flex flex-col w-full'>
+            <p className='text-[14px] font-bold mb-2'>ABOUT</p>
+            <p>There were times every meal was like that. A good recipe. Fresh, local ingredients. Made with lots of love. The same is today. Inspired by our grandmothers' tried and tested recipes, we present to you a treasury of unforgettable traditional flavors. Enjoy!</p>
+          </div>
+          <hr className='w-full text-lightGray'></hr>
+          <div className='flex flex-col w-full'>
+            <p className='text-[14px] font-bold mb-2'>PRICE RANGE</p>
+            <p>$4 - $54</p>
+          </div>
+          <hr className='w-full text-lightGray'></hr>
+          <div className='flex flex-col w-full'>
+            <p className='text-[14px] font-bold mb-2'>MEALS</p>
+            <p>Breakfast, Lunch, Dinner, Brunch, Drinks</p>
+          </div>
+          <hr className='w-full text-lightGray'></hr>
+          <div className='flex flex-col w-full'>
+            <p className='text-[14px] font-bold mb-2'>FEATURES</p>
+            <p>Delivery, Takeout, Reservations, Outdoor Seating, Seating, Parking Available, Validated Parking, Highchairs Available, Wheelchair Accessible, Serves Alcohol, Full Bar, Free Wifi, Accepts Credit Cards, Table Service, Dog Friendly, Family style</p>
+          </div>
         </div>
-        <div className='flex flex-col w-[450px] h-[400px] bg-cardWhite rounded-md shadow-md p-6'>
+        <div className='flex flex-col w-[450px] h-[400px] bg-cardWhite rounded-md shadow-md p-6 justify-between'>
           <p className='font-bold text-[20px]'>Location and contact</p>
+          <Map width='full' height={150} shadow="" allowZoom={false} zoom={17}/>
+          <div className='flex flex-col w-full h-[140px] justify-evenly'>
+            <div className='flex flex-row items-center'>
+              <FontAwesomeIcon icon={faLocationPin} className='text-darkGray text-[20px]'/>
+              <p className='font-mulish font-medium text-[18px] text-darkGray ml-2'>Kraljevica Marka 53, Novi Sad Serbia</p>
+            </div>
+            <div className='flex flex-row w-full justify-between'>
+              <div className='flex w-[50%]'>
+                <div className='flex flex-row items-center'>
+                  <FontAwesomeIcon icon={faLaptop} className='text-darkGray text-[20px]'/>
+                  <p className='font-mulish font-medium text-[18px] text-darkGray ml-2'>Visit website</p>
+                </div>
+              </div>
+              <div className='flex w-[50%]'>
+                <div className='flex flex-row items-center'>
+                  <FontAwesomeIcon icon={faEnvelope} className='text-darkGray text-[20px]'/>
+                  <p className='font-mulish font-medium text-[18px] text-darkGray ml-2'>Send email</p>
+                </div>
+              </div>
+            </div>
+            <div className='flex flex-row items-center'>
+              <FontAwesomeIcon icon={faPhone} className='text-darkGray text-[20px]'/>
+              <p className='font-mulish font-medium text-[18px] text-darkGray ml-2'>+381-644-3161-67</p>
+            </div>
+          </div>
         </div>
       </div>
     </>

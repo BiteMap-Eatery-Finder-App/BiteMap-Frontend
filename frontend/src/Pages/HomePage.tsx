@@ -79,7 +79,7 @@ const HomePage : React.FC<Props> = (props: Props) : JSX.Element => {
         </div>
         <div className='flex flex-col w-[80%] h-full'>
           <div>
-            <Map/>
+            <Map width='full' height={350} shadow='shadow-xl' allowZoom={true} zoom={14}/>
           </div>
           <div className='flex flex-row w-full h-auto justify-between flex-wrap mt-10'>
             {
