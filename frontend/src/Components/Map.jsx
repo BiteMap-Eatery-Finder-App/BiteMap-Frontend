@@ -6,9 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from 'react-leafl
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-type Props = {}
-
-const Map = (props: Props) => {
+const Map = ({width, height, shadow, allowZoom, zoom}) => {
 
     const [Latitude, setLatitude] = useState(Number);
     const [Longitude, setLongitude] = useState(Number);
@@ -43,15 +41,15 @@ const Map = (props: Props) => {
         );
     }else
     return (
-        <div className="w-full h-auto flex rounded-md shadow-xl">
+        <div className={`w-full h-auto flex rounded-md ${shadow}`}>
             <MapContainer 
-                className='w-full h-[350px] rounded-md' 
+                className={`w-${width} h-[${height}px] rounded-md`} 
                 center={[Latitude, Longitude]} // Postavite centar mape na istu poziciju kao i marker
                 attributionControl={true}
-                zoom={14}
+                zoom={zoom}
                 minZoom={3}
                 maxZoom={19}
-                scrollWheelZoom={true}
+                scrollWheelZoom={allowZoom}
                 zoomControl={true}
                 easeLinearity={0.35}
                 dragging={true}>
