@@ -8,6 +8,9 @@ import L from 'leaflet';
 import Footer from './Components/Footer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import VisitEstablishmentPage from './Pages/VisitEstablishmentPage';
+import LoginPage from './Pages/SignInPage';
+import SignInPage from './Pages/SignInPage';
+import SignUpPage from './Pages/SignUpPage';
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
         <Routes>
           <Route path="/" Component = {HomePage}/>
           <Route path='/Establishment/:establishmentId' Component={VisitEstablishmentPage}/>
+          <Route path='/SignIn' Component={SignInPage}/>
+          <Route path='/SignUp' Component={SignUpPage}/>
         </Routes>
         
         <div>
