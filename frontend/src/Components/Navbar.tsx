@@ -9,10 +9,18 @@ const Navbar = (props: Props) => {
         <Link to="/">
           <img src={logoNavBar} className='h-[40px] w-auto cursor-pointer'/>
         </Link>
-        <div className='w-[220px] h-full flex flex-row justify-between'>
-            <button className='rounded-md text-[18px] font-mulish text-lightRed font-semibold hover:text-darkRed transitiion-[0.5s]'>Sign in</button>
+        <div className='w-[220px] h-full flex flex-row justify-between items-center'>
+          <Link to='/SignIn'>
+            <button className='rounded-md text-[18px] font-mulish text-lightRed font-semibold hover:text-darkRed transitiion-[0.5s]'>
+              Sign in
+            </button>
+          </Link>
+          <Link to='/SignUp'>
             <button className='rounded-md w-[120px] font-mulish font-semibold text-lightRed border-[1px] cursor-pointer
-                                border-lightRed text-[18px] hover:text-white hover:bg-darkRed hover:border-[0px] transition-[0.5s]'>Sign up</button>
+                                  border-lightRed text-[18px] hover:text-white hover:bg-darkRed transition-[0.5s] h-[40px]'>
+              Sign up
+            </button>
+          </Link>
         </div>
     </div>
   )
