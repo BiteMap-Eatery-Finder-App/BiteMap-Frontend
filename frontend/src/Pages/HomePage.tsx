@@ -72,7 +72,7 @@ const HomePage : React.FC<Props> = (props: Props) : JSX.Element => {
     );
   }else
   return (
-    <div className='flex flex-col w-full h-full px-10 py-6'>
+    <div className='flex flex-col w-full h-full px-10 py-6 z-[1]'>
       <div className='flex flex-row w-full h-full justify-between'>
         <div className='flex w-[18%] h-full'>
           <SidePanel/>

@@ -41,7 +41,7 @@ const Map = ({width, height, shadow, allowZoom, zoom}) => {
         );
     }else
     return (
-        <div className={`w-full h-auto flex rounded-md ${shadow}`}>
+        <div className={`w-full h-auto flex rounded-md ${shadow} z-[1]`}>
             <MapContainer 
                 className={`w-${width} h-[${height}px] rounded-md`} 
                 center={[Latitude, Longitude]} // Postavite centar mape na istu poziciju kao i marker
