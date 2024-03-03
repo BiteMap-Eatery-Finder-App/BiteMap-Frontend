@@ -2,30 +2,21 @@ import { Link } from 'react-router-dom'
 import logoNavBar from '../Assets/LogoNavBar.png'
 import React, { useEffect, useState } from 'react';
 import NotificationsButton from './NotificationsButton';
+import { jwtDecode } from 'jwt-decode'
+import ProfileButton from './ProfileButton';
 
 const Navbar = (props) => {
   const { userLogged } = props;
   const [username, setUsername] = useState("");
-  //const [userLogged, setUserLogged] = useState(false);
-  //const [token, setToken] = useState("");
 
-  /*const fetchUser = () => {
+  useEffect(() => {
     var token = localStorage.getItem('userToken');
-    if(token !== null){
-      setToken(token);
-      setUserLogged(true);
+    if(token != null){
+      const user = jwtDecode(token);  
+      const usernameClaim = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+      setUsername(usernameClaim);
     }
-  }
-  
-  useEffect(() => {
-    fetchUser();
-  }, [token]);*/
-
-  useEffect(() => {
-    if(userLogged){
-      setUsername("Nemkac");
-    }
-  });
+  }, [userLogged]);
 
   return (
     <div className='w-full h-[70px] bg-lightGray/10 flex flex-row justify-between py-4 px-10 justify-between items-center border-b-[1px] border-lightGray'>
@@ -33,14 +24,15 @@ const Navbar = (props) => {
         <img src={logoNavBar} className='h-[40px] w-auto cursor-pointer'/>
       </Link>
       <div className='w-[220px] h-full flex flex-row justify-between items-center'>
-        {userLogged ? (
+        {userLogged ? 
           // <div className='w-[220px] h-full flex flex-row justify-end items-center'>
           //   <p className='font-mulish text-darkGray text-[20px] font-medium'>{username}</p>
           // </div>
-          <div className='w-[220px] h-full flex flex-row justify-between items-center'>
+          <div className='w-[220px] h-full flex flex-row justify-end items-center'>
             <NotificationsButton/>
+            <ProfileButton/>
           </div>
-        ) : (
+         : 
           <div className='w-[220px] h-full flex flex-row justify-between items-center'>
             <Link to='/SignIn'>
               <button className='rounded-md text-[18px] font-mulish text-lightRed font-semibold hover:text-darkRed transitiion-[0.5s]'>
@@ -54,7 +46,7 @@ const Navbar = (props) => {
               </button>
             </Link>
           </div>
-        )}
+        }
       </div>
     </div>
   )
