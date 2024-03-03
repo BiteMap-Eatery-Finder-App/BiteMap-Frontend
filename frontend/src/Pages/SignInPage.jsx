@@ -9,13 +9,16 @@ const SignInPage = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    //const [loggedUser, setLoggedUser] = useState("");
 
     const signIn = async () => {
         try {
             const response = await axios.post(login, {username, password});
             console.log(response.data);
             localStorage.setItem('userToken', JSON.stringify(response.data));
+            
             navigate('/');
+            navigate(0);
             
         } catch (error) {
             console.log(error.response.data.message);
