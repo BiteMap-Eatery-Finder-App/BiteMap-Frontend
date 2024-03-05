@@ -1,8 +1,57 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import logotip from '../Assets/LogotipWhite.png'
 import img from '../Assets/signupimage.jpg'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { signUp } from '../Endpoints'
+import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
+  const [FirstName, setFirstName] = useState("");
+  const [LastName, setLastName] = useState("");
+  const [DateOfBirthInput, setDateOfBirth] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [Username, setUsername] = useState("");
+  const [Password, setPassword] = useState("");
+  const [Email, setEmail] = useState("")
+  const [repeatedPassword, setRepeatedPassword] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
+
+  const SignUp = async () => {
+    try {
+      if(passwordsMatch){
+        const DateOfBirth = new Date(DateOfBirthInput).toISOString();
+        const response = await axios.post(signUp, {FirstName, LastName, Username, Password, Email, DateOfBirth});
+  
+        navigate('/');
+        navigate(0);
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  }
+
+  const ValidatePasswords = () => {
+    if(Password !== repeatedPassword){
+      console.log("Password does not match");
+    } else {
+      if(Password === "" && repeatedPassword === ""){
+        console.log("Password does not match");
+      }
+      else {
+        console.log("Password correct");
+        setPasswordsMatch(true)
+      }
+    }
+  }
+
+  useEffect(() => {
+    ValidatePasswords();
+  }, [repeatedPassword]);
+
   return (
     <>
       <div className='flex w-full h-[80vh] items-center justify-center'>
@@ -24,58 +73,101 @@ const SignUpPage = () => {
               </p>
             </div>
 
-            <form className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
               <div>
                 <label className="block mb-2 text-sm text-darkGray dark:text-gray-200">First Name</label>
-                <input type="text" placeholder="John" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed focus:outline-none focus:ring focus:ring-opacity-40" />
+                <input type="text" placeholder="John" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 
+                                                                bg-white border border-gray-200 rounded-md dark:placeholder-darkGray 
+                                                                dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray 
+                                                                focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed 
+                                                                focus:outline-none focus:ring focus:ring-opacity-40" 
+                          value={FirstName}
+                          onChange={(e) => setFirstName(e.target.value)}/>
               </div>
 
               <div>
                 <label className="block mb-2 text-sm text-darkGray dark:text-gray-200">Last name</label>
-                <input type="text" placeholder="Snow" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed focus:outline-none focus:ring focus:ring-opacity-40" />
+                <input type="text" placeholder="Snow" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 
+                                                                bg-white border border-gray-200 rounded-md dark:placeholder-darkGray 
+                                                                dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray 
+                                                                focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed 
+                                                                focus:outline-none focus:ring focus:ring-opacity-40" 
+                          value={LastName}
+                          onChange={(e) => setLastName(e.target.value)}/>
               </div>
 
               <div>
                 <label className="block mb-2 text-sm text-darkGray dark:text-gray-200">Date Of Birth</label>
-                <input type="text" placeholder="YYYY/MM/DD" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed focus:outline-none focus:ring focus:ring-opacity-40" />
+                <input type="date" placeholder="YYYY/MM/DD" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 
+                                                                      bg-white border border-gray-200 rounded-md dark:placeholder-darkGray 
+                                                                      dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray
+                                                                      focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed 
+                                                                      focus:outline-none focus:ring focus:ring-opacity-40" 
+                        value={DateOfBirthInput}
+                        onChange={(e) => setDateOfBirth(e.target.value)}/>
               </div>
 
               <div>
                 <label className="block mb-2 text-sm text-darkGray dark:text-gray-200">Phone number</label>
-                <input type="email" placeholder="XX-XXXX-XXXX-XX" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed focus:outline-none focus:ring focus:ring-opacity-40" />
+                <input type="text" placeholder="XX-XXXX-XXXX-XX" className="block w-full px-5 py-3 mt-2 text-darkGray 
+                                                                          placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-darkGray 
+                                                                          dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray 
+                                                                          focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed 
+                                                                          focus:outline-none focus:ring focus:ring-opacity-40"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}/>
               </div>
 
               <div>
                 <label className="block mb-2 text-sm text-darkGray dark:text-gray-200">Username</label>
-                <input type="password" placeholder="john" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed focus:outline-none focus:ring focus:ring-opacity-40" />
+                <input type="text" placeholder="john" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 
+                                                                    bg-white border border-gray-200 rounded-md dark:placeholder-darkGray 
+                                                                    dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray 
+                                                                    focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed 
+                                                                    focus:outline-none focus:ring focus:ring-opacity-40"
+                        value={Username}
+                        onChange={(e) => setUsername(e.target.value)}/>
               </div>
 
               <div>
                 <label className="block mb-2 text-sm text-darkGray dark:text-gray-200">Email address</label>
-                <input type="password" placeholder="johnsnow@example.com" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed focus:outline-none focus:ring focus:ring-opacity-40" />
+                <input type="Email" placeholder="johnsnow@example.com" className="block w-full px-5 py-3 mt-2 text-darkGray 
+                                                                                    placeholder-gray-400 bg-white border border-gray-200 rounded-md 
+                                                                                    dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 
+                                                                                    dark:border-darkGray focus:border-lightRed dark:focus:border-lightRed 
+                                                                                    focus:ring-lightRed focus:outline-none focus:ring focus:ring-opacity-40" 
+                        value={Email}
+                        onChange={(e) => setEmail(e.target.value)}/>
               </div>
 
               <div>
                 <label className="block mb-2 text-sm text-darkGray dark:text-gray-200">Password</label>
-                <input type="password" placeholder="Enter your password" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed focus:outline-none focus:ring focus:ring-opacity-40" />
+                <input type="Password" placeholder="Enter your Password" className="block w-full px-5 py-3 mt-2 text-darkGray 
+                                                                                    placeholder-gray-400 bg-white border border-gray-200 rounded-md 
+                                                                                    dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray 
+                                                                                    focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed 
+                                                                                    focus:outline-none focus:ring focus:ring-opacity-40"
+                        value={Password}
+                        onChange={(e) => setPassword(e.target.value)}/>
               </div>
 
               <div>
-                <label className="block mb-2 text-sm text-darkGray dark:text-gray-200">Confirm password</label>
-                <input type="password" placeholder="Enter your password" className="block w-full px-5 py-3 mt-2 text-darkGray placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 dark:border-darkGray focus:border-lightRed dark:focus:border-lightRed focus:ring-lightRed focus:outline-none focus:ring focus:ring-opacity-40" />
+                <label className="block mb-2 text-sm text-darkGray dark:text-gray-200">Confirm Password</label>
+                <input type="Password" placeholder="Enter your Password" className="block w-full px-5 py-3 mt-2 text-darkGray 
+                                                                                    placeholder-gray-400 bg-white border border-gray-200 rounded-md 
+                                                                                    dark:placeholder-darkGray dark:bg-gray-900 dark:text-gray-300 
+                                                                                    dark:border-darkGray focus:border-lightRed dark:focus:border-lightRed 
+                                                                                    focus:ring-lightRed focus:outline-none focus:ring focus:ring-opacity-40"
+                        value={repeatedPassword}
+                        onChange={(e) => setRepeatedPassword(e.target.value)}/>
               </div>
 
-              <button
-                className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white duration-300 transform bg-lightRed rounded-md hover:bg-darkRed focus:outline-none focus:ring focus:ring-lightRed focus:ring-opacity-50">
-                <span>Sign Up </span>
-
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clip-rule="evenodd" />
-                </svg>
+              <button className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white duration-300 transform bg-lightRed rounded-md hover:bg-darkRed focus:outline-none focus:ring focus:ring-lightRed focus:ring-opacity-50"
+                      onClick={SignUp}>
+                Sign Up
+                <FontAwesomeIcon icon={faArrowRight} className="w-5 h-5 rtl:-scale-x-100"/>
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
