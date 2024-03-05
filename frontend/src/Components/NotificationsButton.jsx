@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const NotificationsButton = () => {
     return (
         <>
-            <div className="relative min-h-screen py-6 flex flex-col justify-center sm:py-12 ml-2">
+            <div className="relative min-h-screen py-6 flex flex-col justify-center sm:py-12">
                 <div className="flex items-center justify-center z-[10] font-mulish">
                     <div className=" relative inline-block text-left dropdown">
                         <button className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-darkGray transition duration-150 ease-in-out rounded-md hover:text-lightRed focus:outline-none focus:bg-lightRed focus:text-white focus:shadow-outline-blue active:bg-lightGrayactive:text-lightGray" 
