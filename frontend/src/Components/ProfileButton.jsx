@@ -1,8 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { faBell, faUser, faGear, faPhone, faFile, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { jwtDecode } from 'jwt-decode'
+import axios from 'axios';
+import { getUserByUsername } from '../Endpoints';
 
 const ProfileButton = () => {
+
+    const [username, setUsername] = useState("");
+    const [user, setUser] = useState();
+
+    function getUsernameFromToken() {
+        const token2 = localStorage.getItem('userToken');
+        const decoded = jwtDecode(token2)
+        const usernameFromToken = decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+        setUsername(usernameFromToken);
+    }
+
+    const fetchUser = async () => {
+        getUsernameFromToken();
+        const response = axios.get(`https://localhost:7116/api/User/GetUserByUsername?username=${username}`);
+        console.log(response);
+    }
+    
+    useEffect(() => {
+        fetchUser();
+    }, []);
 
     return (
         <>
@@ -25,7 +48,7 @@ const ProfileButton = () => {
                                             <img className="flex-shrink-0 object-cover w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="avatar" />               
                                         </div>
                                         <div className='flex flex-col text-left ml-2'>
-                                            <p className='text-[16px] font-semibold'>Nemkac</p>
+                                            <p className='text-[16px] font-semibold'>{username}</p>
                                             <p className='text-[12px]'>nemanjatodorovic132002002@gmail.com</p>
                                         </div>
                                     </div>
