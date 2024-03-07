@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { jwtDecode } from 'jwt-decode'
 import axios from 'axios';
 import { getUserByUsername } from '../Endpoints';
+import { Link } from 'react-router-dom';
 
 const ProfileButton = () => {
 
@@ -12,20 +13,30 @@ const ProfileButton = () => {
 
     function getUsernameFromToken() {
         const token2 = localStorage.getItem('userToken');
-        const decoded = jwtDecode(token2)
+        const decoded = jwtDecode(token2);
         const usernameFromToken = decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
         setUsername(usernameFromToken);
     }
-
+    
     const fetchUser = async () => {
-        getUsernameFromToken();
-        const response = axios.get(`https://localhost:7116/api/User/GetUserByUsername?username=${username}`);
-        console.log(response);
+        try {
+            const response = await axios.get(`${getUserByUsername}${username}`);
+            setUser(response.data);
+            console.log(response);
+        } catch (error) {
+            console.error('Error fetching user:', error);
+        }
     }
     
     useEffect(() => {
-        fetchUser();
+        getUsernameFromToken();
     }, []);
+    
+    useEffect(() => {
+        if (username !== "") {
+            fetchUser();
+        }
+    }, [username]);
 
     return (
         <>
@@ -48,15 +59,23 @@ const ProfileButton = () => {
                                             <img className="flex-shrink-0 object-cover w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="avatar" />               
                                         </div>
                                         <div className='flex flex-col text-left ml-2'>
-                                            <p className='text-[16px] font-semibold'>{username}</p>
-                                            <p className='text-[12px]'>nemanjatodorovic132002002@gmail.com</p>
+                                            {
+                                                user && (
+                                                    <div>
+                                                        <p className='text-[16px] font-semibold'>{user.username}</p>
+                                                        <p className='text-[12px]'>{user.email}</p>
+                                                    </div>
+                                                )
+                                            }
                                         </div>
                                     </div>
                                     <hr className='w-full text-lightGray my-2'></hr>
-                                    <div className='flex flex-row py-2 px-4 w-full h-[50px] hover:bg-lightGray transition-[0.5s] items-center my-1 cursor-pointer rounded-md' role="menuitem">
-                                        <FontAwesomeIcon icon={faUser} className='text-[16px]'/>
-                                        <p className='ml-2'>Profile</p>
-                                    </div>
+                                    <Link to="/profile">
+                                        <div className='flex flex-row py-2 px-4 w-full h-[50px] hover:bg-lightGray transition-[0.5s] items-center my-1 cursor-pointer rounded-md' role="menuitem">
+                                            <FontAwesomeIcon icon={faUser} className='text-[16px]'/>
+                                            <p className='ml-2'>Profile</p>
+                                        </div>
+                                    </Link>
                                     <div className='flex flex-row py-2 px-4 w-full h-[50px] hover:bg-lightGray transition-[0.5s] items-center my-1 cursor-pointer rounded-md' role="menuitem">
                                         <FontAwesomeIcon icon={faGear} className='text-[16px]'/>
                                         <p className='ml-2'>Settings</p>
