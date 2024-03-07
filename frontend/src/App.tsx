@@ -11,6 +11,7 @@ import LoginPage from './Pages/SignInPage';
 import SignInPage from './Pages/SignInPage';
 import SignUpPage from './Pages/SignUpPage';
 import Navbar from './Components/Navbar.jsx';
+import UserProfilePage from './Pages/UserProfilePage';
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
           <Route path='/Establishment/:establishmentId' Component={VisitEstablishmentPage}/>
           <Route path='/SignIn' Component={SignInPage}/>
           <Route path='/SignUp' Component={SignUpPage}/>
+          <Route path='/profile' Component={UserProfilePage}/>
         </Routes>
         
         <div>
